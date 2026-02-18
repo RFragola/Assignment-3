@@ -1,23 +1,22 @@
 def calculate_commission(sales_amount):
-    """Returns 10% commission for a given sales amount."""
     return sales_amount * 0.10
 
 
 def print_leaderboard(sales):
     commissions = {}
 
-    # Calculate commissions using a for loop
+    # Calculate commissions
     for employee in sales:
         commissions[employee] = calculate_commission(sales[employee])
 
-    # Sort employees by commission (highest first)
+    # Sort by commission (highest first)
     sorted_commissions = sorted(
         commissions.items(),
         key=lambda item: item[1],
         reverse=True
     )
 
-    print("----- Commission Leaderboard -----")
+    print("\n----- Commission Leaderboard -----")
 
     rank = 1
     for employee, commission in sorted_commissions:
@@ -25,7 +24,33 @@ def print_leaderboard(sales):
         rank += 1
 
 
-# Given sales data
-sales = {"Alice": 5000, "Bob": 7000, "Carol": 3000}
+def main():
+    sales = {}
 
-print_leaderboard(sales)
+    try:
+        num_employees = int(input("How many employees? "))
+    except ValueError:
+        print("Invalid number. Exiting program.")
+        return
+
+    for i in range(num_employees):
+        print(f"\nEmployee {i + 1}")
+        name = input("Enter employee name: ")
+
+        while True:
+            try:
+                amount = float(input("Enter total sales: $"))
+                if amount < 0:
+                    print("Sales cannot be negative. Try again.")
+                    continue
+                break
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+
+        sales[name] = amount
+
+    print_leaderboard(sales)
+
+
+# Run the program
+main()
