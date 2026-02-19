@@ -39,3 +39,5 @@ def main():
         bar = "#" * bar_length
 
         print(f"Year {i+1}: {bar}")
+
+main()
